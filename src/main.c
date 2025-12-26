@@ -115,6 +115,12 @@ int main(int argc, char **argv) {
         return EXIT_SUCCESS;
     }
 
+    /* Handle version mode */
+    if (args.mode == MODE_VERSION) {
+        print_version();
+        return EXIT_SUCCESS;
+    }
+
     /* Validate arguments */
     if (validate_args(&args) < 0) {
         fprintf(stderr, "\n");

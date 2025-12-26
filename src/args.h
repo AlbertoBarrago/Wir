@@ -12,7 +12,8 @@ typedef enum {
     MODE_PORT,      /* Inspect a port */
     MODE_PID,       /* Inspect a PID */
     MODE_ALL,       /* List all processes */
-    MODE_HELP       /* Show help */
+    MODE_HELP,      /* Show help */
+    MODE_VERSION    /* Show version */
 } operation_mode_t;
 
 /**
@@ -48,6 +49,11 @@ int parse_args(int argc, char **argv, cli_args_t *args);
  * @param program_name Name of the program (argv[0])
  */
 void print_usage(const char *program_name);
+
+/**
+ * Print version information
+ */
+void print_version(void);
 
 /**
  * Validate parsed arguments for logical consistency

@@ -1,16 +1,25 @@
 #include "args.h"
 #include "utils.h"
+#include "version.h"
 #include <string.h>
 #include <errno.h>
 #include <limits.h>
 
 /**
+ * Print version information
+ */
+void print_version(void) {
+    printf("%s version %s\n", WIR_NAME, WIR_VERSION);
+    printf("%s\n", WIR_DESCRIPTION);
+}
+
+/**
  * Print usage/help message
  */
 void print_usage(const char *program_name) {
-    printf("Usage: %s [OPTIONS]\n", program_name);
+    printf("%s v%s - %s\n", WIR_NAME, WIR_VERSION, WIR_DESCRIPTION);
     printf("\n");
-    printf("A tool to inspect what's running on specific ports or explain process details.\n");
+    printf("Usage: %s [OPTIONS]\n", program_name);
     printf("\n");
     printf("Options:\n");
     printf("  --pid <n>         Explain a specific PID\n");
@@ -22,6 +31,7 @@ void print_usage(const char *program_name) {
     printf("  --warnings        Show only warnings\n");
     printf("  --no-color        Disable colorized output\n");
     printf("  --env             Show only environment variables for the process\n");
+    printf("  --version         Show version information\n");
     printf("  --help            Show this help message\n");
     printf("\n");
     printf("Examples:\n");
@@ -81,6 +91,10 @@ int parse_args(int argc, char **argv, cli_args_t *args) {
 
         if (strcmp(arg, "--help") == 0 || strcmp(arg, "-h") == 0) {
             args->mode = MODE_HELP;
+            return 0;
+        }
+        else if (strcmp(arg, "--version") == 0 || strcmp(arg, "-v") == 0) {
+            args->mode = MODE_VERSION;
             return 0;
         }
         else if (strcmp(arg, "--all") == 0) {
